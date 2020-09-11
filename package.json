@@ -1,15 +1,15 @@
 {
-  "name": "@fernandoherlo/vue-core",
+  "name": "@fernandoherlo/vue-core-old",
   "version": "0.11.1",
   "author": "Fernando Herlo",
   "repository": {
     "type": "git",
-    "url": "https://github.com/fernandoherlo/vue-core.git"
+    "url": "https://github.com/d-menta/vue-core.git"
   },
   "bugs": {
-    "url": "https://github.com/fernandoherlo/vue-core/issues"
+    "url": "https://github.com/d-menta/vue-core/issues"
   },
-  "homepage": "https://github.com/fernandoherlo/vue-core#readme",
+  "homepage": "https://github.com/d-menta/vue-core#readme",
   "license": "MIT",
   "scripts": {
     "serve": "vue-cli-service serve 'demo/main'",
