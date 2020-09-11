@@ -70,25 +70,32 @@ export default {
         }
       })
     },
-    previewFiles: function () {
-      let files = this.$refs.file.files
-      if (files) {
-        this.filesUploadCount = files.length
-        this.$refs.fileSelect.innerText = files.length + this.field.selectText
-      } else {
-        this.filesUploadCount = 0
-        this.$refs.fileSelect.innerText = this.field.addText
-      }
-    },
+    // previewFiles: function () {
+    //   let files = this.$refs.file.files
+    //   if (files) {
+    //     this.filesUploadCount = files.length
+    //     this.$refs.fileSelect.innerText = files.length + this.field.selectText
+    //   } else {
+    //     this.filesUploadCount = 0
+    //     this.$refs.fileSelect.innerText = this.field.addText
+    //   }
+    // },
     uploadFilesDropbox: function () {
+
+      const { isEmpty, data } = this.$refs.signaturePad.saveSignature()
+      this.$log.debug(isEmpty)
+      this.$log.debug(data)
+
       // Get
       let formData = new FormData()
-      let files = this.$refs.file.files
-      for (var i = 0; i < files.length; i++) {
-        formData.append('file', files[i])
-      }
+      formData.append('file', data)
+
+      // let files = this.$refs.file.files
+      // for (var i = 0; i < files.length; i++) {
+      //   formData.append('file', files[i])
+      // }
       // RESET
-      this.$refs.fileSelect.innerText = this.field.upUpText
+      // this.$refs.fileSelect.innerText = this.field.upUpText
       this.resetDropboxElements()
       var options = {
         url: this.urlUpload,
@@ -97,7 +104,7 @@ export default {
       }
       this.$http.axios(options).then(() => {
         this.getFilesDropbox()
-        this.$refs.fileSelect.innerText = this.field.addText
+        // this.$refs.fileSelect.innerText = this.field.addText
         // Notify
         if (this.$notify){
           this.$notify({
@@ -109,14 +116,14 @@ export default {
         }
       }, (/*response*/) => {
         this.getFilesDropbox()
-        this.$refs.fileSelect.innerText = this.field.addText
+        // this.$refs.fileSelect.innerText = this.field.addText
       })
     },
     resetDropboxElements: function () {
       this.files = []
       this.filesUploadCount = 0
-      this.$refs.file.type = 'text'
-      this.$refs.file.type = 'file'
+      // this.$refs.file.type = 'text'
+      // this.$refs.file.type = 'file'
       this.loading = false
       this.confirm = false
     }
@@ -129,9 +136,9 @@ export default {
     <h3>{{ field.label }}</h3>
     <div class="form-group w100">
       <div class="photos-btns">
-        <label class="btn file">
-          <span ref="fileSelect">{{ field.addText }}</span> <input type="file" ref="file" multiple hidden @change="previewFiles">
-        </label>
+      
+        <VueSignaturePad height="300px" ref="signaturePad" />
+
         <button type="button" class="btn upload" @click="uploadFilesDropbox()" tabindex="0" :disabled="!filesUploadCount">{{ field.upText }}</button>
         <button v-if="!confirm" type="button" class="btn delete" @click="deleteFilesDropbox()" tabindex="0" :disabled="!files.length">{{ field.deleteText }}</button>
         <button v-if="confirm" type="button" class="btn delete ask" @click="confirmDeleteFilesDropbox()" tabindex="0" :disabled="!files.length">{{ field.confirmDeleteText }}</button>
