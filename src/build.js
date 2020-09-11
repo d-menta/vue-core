@@ -1,5 +1,5 @@
 /**
- * @name VueJS VueCore (vue-core)
+ * @name VueJS VueCoreOld (vue-core-old)
  * @description Library for Vue.js 2.0
  */
  // Services
@@ -34,6 +34,7 @@ import Select from '@/components/partials/Select'
 import Textarea from '@/components/partials/Textarea'
 import DatePicker from '@/components/partials/DatePicker'
 import Dropbox from '@/components/partials/Dropbox'
+import Signature from '@/components/partials/Signature'
 
 export {
   auth,
@@ -61,5 +62,6 @@ export {
   Select,
   Textarea,
   DatePicker,
-  Dropbox
+  Dropbox,
+  Signature
 }
