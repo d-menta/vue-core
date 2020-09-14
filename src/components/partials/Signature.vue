@@ -37,6 +37,9 @@ export default {
   },
   methods: {
     getFilesDropbox: function () {
+
+      this.cleanSignature()
+      
       var options = {
         url: this.urlFiles,
         method: 'GET'
@@ -118,10 +121,10 @@ export default {
       this.files = []
       this.loading = false
       this.confirm = false
-      this.$refs.signaturePad.clearSignature()
     },
     cleanSignature: function () {
       this.$refs.signaturePad.clearSignature()
+      this.$refs.signaturePad.resizeCanvas()
     }
   }
 }
