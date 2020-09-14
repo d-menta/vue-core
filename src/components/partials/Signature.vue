@@ -14,9 +14,11 @@ export default {
   data () {
     return {
       loading: false,
-      filesUploadCount: 0,
       files: [],
-      confirm: false
+      confirm: false,
+      options: {
+        backgroundColor: 'rgba(248,250,218,0.8)',
+      }
     }
   },
   computed: {
@@ -73,10 +75,8 @@ export default {
     // previewFiles: function () {
     //   let files = this.$refs.file.files
     //   if (files) {
-    //     this.filesUploadCount = files.length
     //     this.$refs.fileSelect.innerText = files.length + this.field.selectText
     //   } else {
-    //     this.filesUploadCount = 0
     //     this.$refs.fileSelect.innerText = this.field.addText
     //   }
     // },
@@ -121,25 +121,28 @@ export default {
     },
     resetDropboxElements: function () {
       this.files = []
-      this.filesUploadCount = 0
       // this.$refs.file.type = 'text'
       // this.$refs.file.type = 'file'
       this.loading = false
       this.confirm = false
+      this.$refs.signaturePad.clearSignature()
     }
   }
 }
 </script>
 
 <template>
-  <div class="dropbox">
+  <div class="dropbox signature">
     <h3>{{ field.label }}</h3>
     <div class="form-group w100">
       <div class="photos-btns">
       
-        <VueSignaturePad height="300px" ref="signaturePad" />
+        <VueSignaturePad width="300px" height="300px" :options="options" ref="signaturePad" v-if="!files.length" />
 
-        <button type="button" class="btn upload" @click="uploadFilesDropbox()" tabindex="0" :disabled="!filesUploadCount">{{ field.upText }}</button>
+        <hr/>
+
+        <button type="button" class="btn cancel" @click="resetDropboxElements()" tabindex="0" :disabled="files.length">{{ field.resetText }}</button>
+        <button type="button" class="btn upload" @click="uploadFilesDropbox()" tabindex="0" :disabled="files.length">{{ field.upText }}</button>
         <button v-if="!confirm" type="button" class="btn delete" @click="deleteFilesDropbox()" tabindex="0" :disabled="!files.length">{{ field.deleteText }}</button>
         <button v-if="confirm" type="button" class="btn delete ask" @click="confirmDeleteFilesDropbox()" tabindex="0" :disabled="!files.length">{{ field.confirmDeleteText }}</button>
         <button v-if="confirm" type="button" class="btn cancel" @click="cancelDeleteFilesDropbox()" tabindex="0" :disabled="!files.length">{{ field.cancelDeleteText }}</button>
