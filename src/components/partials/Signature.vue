@@ -15,7 +15,10 @@ export default {
     return {
       loading: false,
       files: [],
-      confirm: false
+      confirm: false,
+      options: {
+        penColor: 'blue'
+      }
     }
   },
   computed: {
@@ -130,7 +133,7 @@ export default {
     <div class="form-group w100">
       <div class="photos-btns">
       
-        <VueSignaturePad width="300px" height="200px" ref="signaturePad" v-show="!files.length" />
+        <VueSignaturePad width="300px" height="200px" :options="options" ref="signaturePad" v-show="!files.length" />
 
         <hr/>
 
