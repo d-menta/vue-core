@@ -80,41 +80,44 @@ export default {
     uploadFilesDropbox: function () {
 
       const { isEmpty, data } = this.$refs.signaturePad.saveSignature()
+      
       this.$log.debug(isEmpty)
-      this.$log.debug(data)
 
-      // Get
-      let formData = new FormData()
-      formData.append('file', data)
-
-      // let files = this.$refs.file.files
-      // for (var i = 0; i < files.length; i++) {
-      //   formData.append('file', files[i])
-      // }
-      // RESET
-      // this.$refs.fileSelect.innerText = this.field.upUpText
-      this.resetDropboxElements()
-      var options = {
-        url: this.urlUpload,
-        method: 'POST',
-        data: formData
-      }
-      this.$http.axios(options).then(() => {
-        this.getFilesDropbox()
-        // this.$refs.fileSelect.innerText = this.field.addText
+      if (!isEmpty) {
+        // Get
+        let formData = new FormData()
+        formData.append('file', data)
+        this.resetDropboxElements()
+        var options = {
+          url: this.urlUpload,
+          method: 'POST',
+          data: formData
+        }
+        this.$http.axios(options).then(() => {
+          this.getFilesDropbox()
+          // Notify
+          if (this.$notify){
+            this.$notify({
+              group: 'global',
+              type: 'success',
+              title: 'Save',
+              text: 'Save element successfull!'
+            })
+          }
+        }, (/*response*/) => {
+          this.getFilesDropbox()
+        })
+      } else {
         // Notify
         if (this.$notify){
           this.$notify({
             group: 'global',
-            type: 'success',
-            title: 'Save',
-            text: 'Save element successfull!'
+            type: 'error',
+            title: 'Error',
+            text: 'Sin firma'
           })
         }
-      }, (/*response*/) => {
-        this.getFilesDropbox()
-        // this.$refs.fileSelect.innerText = this.field.addText
-      })
+      }
     },
     resetDropboxElements: function () {
       this.files = []
