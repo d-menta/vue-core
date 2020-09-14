@@ -125,6 +125,8 @@ export default {
       // this.$refs.file.type = 'file'
       this.loading = false
       this.confirm = false
+      
+      this.$refs.signaturePad.clearSignature()
     },
     cleanSignature: function () {
       this.$refs.signaturePad.clearSignature()
