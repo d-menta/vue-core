@@ -17,7 +17,7 @@ export default {
       files: [],
       confirm: false,
       options: {
-        backgroundColor: 'rgba(248,250,218,0.8)',
+        backgroundColor: 'rgba(248,250,218,0.9)',
       }
     }
   },
@@ -137,7 +137,7 @@ export default {
     <div class="form-group w100">
       <div class="photos-btns">
       
-        <VueSignaturePad width="300px" height="300px" :options="options" ref="signaturePad" v-if="!files.length" />
+        <VueSignaturePad width="300px" height="200px" :options="options" ref="signaturePad" v-if="!files.length" />
 
         <hr/>
 
