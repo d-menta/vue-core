@@ -38,8 +38,6 @@ export default {
   methods: {
     getFilesDropbox: function () {
 
-      this.cleanSignature()
-      
       var options = {
         url: this.urlFiles,
         method: 'GET'
@@ -47,6 +45,8 @@ export default {
       this.$http.axios(options).then((dropboxFiles) => {
         this.loading = true
         this.files = dropboxFiles.data
+
+        this.cleanSignature()
       })
     },
     deleteFilesDropbox: function () {
@@ -123,8 +123,10 @@ export default {
       this.confirm = false
     },
     cleanSignature: function () {
-      this.$refs.signaturePad.clearSignature()
-      this.$refs.signaturePad.resizeCanvas()
+      if (this.$refs.signaturePad) {
+        this.$refs.signaturePad.clearSignature()
+        this.$refs.signaturePad.resizeCanvas()
+      }
     }
   }
 }
