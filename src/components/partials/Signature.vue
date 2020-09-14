@@ -69,14 +69,6 @@ export default {
         }
       })
     },
-    // previewFiles: function () {
-    //   let files = this.$refs.file.files
-    //   if (files) {
-    //     this.$refs.fileSelect.innerText = files.length + this.field.selectText
-    //   } else {
-    //     this.$refs.fileSelect.innerText = this.field.addText
-    //   }
-    // },
     uploadFilesDropbox: function () {
 
       const { isEmpty, data } = this.$refs.signaturePad.saveSignature()
@@ -121,11 +113,8 @@ export default {
     },
     resetDropboxElements: function () {
       this.files = []
-      // this.$refs.file.type = 'text'
-      // this.$refs.file.type = 'file'
       this.loading = false
       this.confirm = false
-      
       this.$refs.signaturePad.clearSignature()
     },
     cleanSignature: function () {
