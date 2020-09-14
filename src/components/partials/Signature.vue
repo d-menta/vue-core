@@ -141,8 +141,8 @@ export default {
 
         <hr/>
 
-        <button type="button" class="btn cancel" @click="resetDropboxElements()" tabindex="0" :disabled="files.length">{{ field.resetText }}</button>
-        <button type="button" class="btn upload" @click="uploadFilesDropbox()" tabindex="0" :disabled="files.length">{{ field.upText }}</button>
+        <button type="button" class="btn cancel" @click="resetDropboxElements()" tabindex="0" :disabled="files.length > 0">{{ field.resetText }}</button>
+        <button type="button" class="btn upload" @click="uploadFilesDropbox()" tabindex="0" :disabled="files.length > 0">{{ field.upText }}</button>
         <button v-if="!confirm" type="button" class="btn delete" @click="deleteFilesDropbox()" tabindex="0" :disabled="!files.length">{{ field.deleteText }}</button>
         <button v-if="confirm" type="button" class="btn delete ask" @click="confirmDeleteFilesDropbox()" tabindex="0" :disabled="!files.length">{{ field.confirmDeleteText }}</button>
         <button v-if="confirm" type="button" class="btn cancel" @click="cancelDeleteFilesDropbox()" tabindex="0" :disabled="!files.length">{{ field.cancelDeleteText }}</button>
