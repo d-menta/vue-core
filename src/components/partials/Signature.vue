@@ -146,7 +146,7 @@ export default {
       </template>
 
       <div class="photos-btns">
-        <VueSignaturePad width="300px" height="200px" :options="options" ref="signaturePad" v-show="!files.length" />
+        <VueSignaturePad width="300px" height="200px" :options="options" ref="signaturePad" v-show="!files.length && !loading" />
         <hr/>
         <button type="button" class="btn cancel" @click="cleanSignature()" tabindex="0" :disabled="files.length > 0">{{ field.resetText }}</button>
         <button type="button" class="btn upload" @click="uploadFilesDropbox()" tabindex="0" :disabled="files.length > 0">{{ field.upText }}</button>
