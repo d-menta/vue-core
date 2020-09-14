@@ -135,7 +135,7 @@ export default {
       <template v-if="loading">
         <ul class="photos-list" v-if="files">
           <li v-for="(file, index) in files" v-bind:key="file.metadata.id">
-            <a :href="file.link" target="_blank"><small>{{index+1}}</small><img :src="file.link"></a>
+            <small>{{index+1}}</small><img :src="file.link">
           </li>
         </ul>
       </template>
