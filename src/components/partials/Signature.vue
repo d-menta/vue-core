@@ -125,6 +125,8 @@ export default {
       // this.$refs.file.type = 'file'
       this.loading = false
       this.confirm = false
+    },
+    cleanSignature: function () {
       this.$refs.signaturePad.clearSignature()
     }
   }
@@ -137,11 +139,11 @@ export default {
     <div class="form-group w100">
       <div class="photos-btns">
       
-        <VueSignaturePad width="300px" height="200px" :options="options" ref="signaturePad" v-if="!files.length" />
+        <VueSignaturePad width="300px" height="200px" :options="options" ref="signaturePad" v-show="!files.length" />
 
         <hr/>
 
-        <button type="button" class="btn cancel" @click="resetDropboxElements()" tabindex="0" :disabled="files.length > 0">{{ field.resetText }}</button>
+        <button type="button" class="btn cancel" @click="cleanSignature()" tabindex="0" :disabled="files.length > 0">{{ field.resetText }}</button>
         <button type="button" class="btn upload" @click="uploadFilesDropbox()" tabindex="0" :disabled="files.length > 0">{{ field.upText }}</button>
         <button v-if="!confirm" type="button" class="btn delete" @click="deleteFilesDropbox()" tabindex="0" :disabled="!files.length">{{ field.deleteText }}</button>
         <button v-if="confirm" type="button" class="btn delete ask" @click="confirmDeleteFilesDropbox()" tabindex="0" :disabled="!files.length">{{ field.confirmDeleteText }}</button>
