@@ -131,18 +131,7 @@ export default {
   <div class="dropbox signature">
     <h3>{{ field.label }}</h3>
     <div class="form-group w100">
-      <div class="photos-btns">
-      
-        <VueSignaturePad width="300px" height="200px" :options="options" ref="signaturePad" v-show="!files.length" />
 
-        <hr/>
-
-        <button type="button" class="btn cancel" @click="cleanSignature()" tabindex="0" :disabled="files.length > 0">{{ field.resetText }}</button>
-        <button type="button" class="btn upload" @click="uploadFilesDropbox()" tabindex="0" :disabled="files.length > 0">{{ field.upText }}</button>
-        <button v-if="!confirm" type="button" class="btn delete" @click="deleteFilesDropbox()" tabindex="0" :disabled="!files.length">{{ field.deleteText }}</button>
-        <button v-if="confirm" type="button" class="btn delete ask" @click="confirmDeleteFilesDropbox()" tabindex="0" :disabled="!files.length">{{ field.confirmDeleteText }}</button>
-        <button v-if="confirm" type="button" class="btn cancel" @click="cancelDeleteFilesDropbox()" tabindex="0" :disabled="!files.length">{{ field.cancelDeleteText }}</button>
-      </div>
       <template v-if="loading">
         <ul class="photos-list" v-if="files">
           <li v-for="(file, index) in files" v-bind:key="file.metadata.id">
@@ -155,6 +144,16 @@ export default {
           <icon name="sync" scale="2" spin></icon>
         </div>
       </template>
+
+      <div class="photos-btns">
+        <VueSignaturePad width="300px" height="200px" :options="options" ref="signaturePad" v-show="!files.length" />
+        <hr/>
+        <button type="button" class="btn cancel" @click="cleanSignature()" tabindex="0" :disabled="files.length > 0">{{ field.resetText }}</button>
+        <button type="button" class="btn upload" @click="uploadFilesDropbox()" tabindex="0" :disabled="files.length > 0">{{ field.upText }}</button>
+        <button v-if="!confirm" type="button" class="btn delete" @click="deleteFilesDropbox()" tabindex="0" :disabled="!files.length">{{ field.deleteText }}</button>
+        <button v-if="confirm" type="button" class="btn delete ask" @click="confirmDeleteFilesDropbox()" tabindex="0" :disabled="!files.length">{{ field.confirmDeleteText }}</button>
+        <button v-if="confirm" type="button" class="btn cancel" @click="cancelDeleteFilesDropbox()" tabindex="0" :disabled="!files.length">{{ field.cancelDeleteText }}</button>
+      </div>
     </div>
   </div>
 </template>
